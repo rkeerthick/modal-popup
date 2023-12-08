@@ -1,10 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
 import Modal from "./components/Modal";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Dummy from "./components/Dummy";
+import Modal2 from "./components/Modal2";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleToggle = () => {
+    setIsOpen(prev => !prev);
+  }
   const modal = useRef();
   const onShowModal = () => {
     modal.current.open();
@@ -14,13 +19,17 @@ function App() {
   }
   return (
     <>
-      <Modal ref={modal}>
+      {/* <Modal ref={modal}>
         <Dummy closeModal={closeModal} />
-      </Modal>
-      <div className="App" style={{height:'200vh'}}>
+      </Modal> */}
+      <Modal2 isOpen={isOpen}>
+        <Dummy close={handleToggle} />
+      </Modal2>
+      <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-        <button type="button" onClick={onShowModal}>
+        {/* <button type="button" onClick={onShowModal}> */}
+        <button type="button" onClick={() => handleToggle()}>
           Open
         </button>
           <p>
